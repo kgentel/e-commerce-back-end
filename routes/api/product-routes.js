@@ -16,10 +16,16 @@ router.get('/', (req, res) => {
         'stock',
         'category_id'
       ],
-    include: [{
+    include: [
+      {
         model: Category,
         attributes: ['id', 'category_name']
-    }]
+      },
+      {
+        model: Tag,
+        attributes: ['tag_name']
+      }
+    ]
   })
     .then((productData) => res.json(productData))
     .catch((err) => {
@@ -36,10 +42,16 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: [{
-      model: Category,
-      attributes: ['id', 'category_name']
-  }]
+    include: [
+      {
+        model: Category,
+        attributes: ['id', 'category_name']
+      },
+      {
+        model: Tag,
+        attributes: ['tag_name']
+      }
+    ]
   })
     .then((productData) => {
       if (!productData) {

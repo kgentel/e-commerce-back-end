@@ -11,6 +11,10 @@ router.get('/', (req, res) => {
       'id',
       'tag_name'
     ],
+    include: [{
+      model: Product,
+      attributes: ['id', 'product_name', 'price', 'stock']
+  }]
   })
     .then((tagData) => res.json(tagData))
     .catch((err) => {
@@ -26,6 +30,10 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
+    include: [{
+      model: Product,
+      attributes: ['id', 'product_name', 'price', 'stock']
+  }]
   })
     .then((tagData) => {
       if (!tagData) {
